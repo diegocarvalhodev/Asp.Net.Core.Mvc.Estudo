@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210108034725_Inicial.cs" />
+    <Compile Remove="Migrations\20210108034725_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20210108040036_Inicial.cs" />
+    <Compile Remove="Migrations\20210108040036_Inicial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
   </ItemGroup>
 

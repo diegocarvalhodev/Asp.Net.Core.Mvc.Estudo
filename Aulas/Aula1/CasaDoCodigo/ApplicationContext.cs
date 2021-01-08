@@ -14,12 +14,13 @@ namespace CasaDoCodigo
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Produto>()
-                .HasKey(t => t.Id);
-        }
+                modelBuilder.Entity<Produto>()
+                    .HasKey(t => t.Id);
+
+            }
     }
 }
