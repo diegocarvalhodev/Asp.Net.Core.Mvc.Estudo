@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CasaDoCodigo.DbConfiguration;
+using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,12 +26,18 @@ namespace CasaDoCodigo
         {
             services.AddMvc();
 
-            //Banco de dados para os testes na Funcesi
-            string connectionString = Configuration.GetConnectionString("DbWork");
+            // Banco de dados para os testes na Funcesi.
+            //string connectionString = Configuration.GetConnectionString("DbWork");
+
+            // Banco de dados para testes em casa.
+            string connectionString = Configuration.GetConnectionString("DbHome");
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connectionString)
             );
+
+            services.AddTransient<IDataService, DataService>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,19 +63,30 @@ namespace CasaDoCodigo
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
 
+
             /* Garantir que o banco de dados esteja criado ao iniciar a aplicação.
              * Caso o banco de dados não exista, o EF Core vai criar o banco e tabelas.
-             */
-            serviceProvider
+             * Cria o banco com base nos modelos. Além de não usar migração, não vai 
+             * mais permitir que migrações sejam utilizadas no banco criado com o EnsureCreated.
+             * O seu uso é recomendado para criar bancos de teste.*/
+            /*serviceProvider
                 .GetService<ApplicationContext>()
                 .Database
-                //.EnsureCreated();
-                /* Cria o banco com base nos modelos. Além de não usar migração, não vai 
-                 * mais permitir que migrações sejam utilizadas no banco criado com o EnsureCreated.
-                 * O seu uso é recomendado para criar bancos de teste.*/
-                .Migrate();
-                /* Se o banco ainda não estiver criado, irá gerar o banco utilizando migração.
-                 * Não impedir que novas migrações sejam aplicadas ao banco de dados gerado.*/
+                .EnsureCreated();*/
+
+            /* Se o banco ainda não estiver criado, irá gerar o banco utilizando migração.
+             * Não impedir que novas migrações sejam aplicadas ao banco de dados gerado.*/
+            /*serviceProvider
+                .GetService<ApplicationContext>()
+                .Database
+                .Migrate();*/
+
+            /* Inicializando o banco utilizando a classe DataService,
+             * que foi criada para centralizar essa responsabilidade. */
+            serviceProvider
+                .GetService<IDataService>()
+                .InicializeDB();
+
         }
     }
 }
