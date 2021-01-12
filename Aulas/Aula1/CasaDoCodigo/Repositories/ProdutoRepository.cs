@@ -19,17 +19,17 @@ namespace CasaDoCodigo.Repositories
 
         public IList<Produto> GetProdutos()
         {
-            return context.Set<Produto>().ToList();
+            return this.context.Set<Produto>().ToList();
         }
 
         public void SaveProdutos(List<Livro> livros)
         {
             foreach (var livro in livros)
             {
-                context.Set<Models.Produto>().Add(new Models.Produto(livro.Codigo, livro.Nome, livro.Preco));
+                this.context.Set<Models.Produto>().Add(new Models.Produto(livro.Codigo, livro.Nome, livro.Preco));
             }
 
-            context.SaveChanges();
+            this.context.SaveChanges();
         }
     }
 }

@@ -23,9 +23,9 @@ namespace CasaDoCodigo.DbConfiguration
 
         public void InicializeDB()
         {
-            context.Database.EnsureCreated();
+            this.context.Database.EnsureCreated();
             List<Livro> livros = GetLivros();
-            produtoRepository.SaveProdutos(livros);
+            this.produtoRepository.SaveProdutos(livros);
         }
 
         private static List<Livro> GetLivros()

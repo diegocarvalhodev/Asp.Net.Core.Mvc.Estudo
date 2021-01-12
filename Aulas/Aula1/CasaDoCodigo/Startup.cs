@@ -30,7 +30,7 @@ namespace CasaDoCodigo
             //string connectionString = Configuration.GetConnectionString("DbWork");
 
             // Banco de dados para testes em casa.
-            string connectionString = Configuration.GetConnectionString("DbHome");
+            string connectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connectionString)
