@@ -24,8 +24,14 @@ namespace CasaDoCodigo.DbConfiguration
         public void InicializeDB()
         {
             this.context.Database.EnsureCreated();
-            List<Livro> livros = GetLivros();
-            this.produtoRepository.SaveProdutos(livros);
+
+            var livrosNoBanco = this.context.Set<Produto>().ToList();
+
+            List<Livro> livrosImportados = GetLivros();
+
+            var livrosNovos = livrosImportados.Where(x => !livrosNoBanco.Select(y => y.Codigo).Contains(x.Codigo)).ToList();
+
+            this.produtoRepository.SaveProdutos(livrosNovos);
         }
 
         private static List<Livro> GetLivros()
