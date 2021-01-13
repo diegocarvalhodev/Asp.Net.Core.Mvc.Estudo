@@ -5,28 +5,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CasaDoCodigo.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
     {
-        private ApplicationContext context;
-
-        public ProdutoRepository(ApplicationContext context)
+        public ProdutoRepository(ApplicationContext context) : base(context)
         {
-            this.context = context;
         }
 
         public IList<Produto> GetProdutos()
         {
-            return this.context.Set<Produto>().ToList();
+            return dbSets.ToList();
         }
 
         public void SaveProdutos(List<Livro> livros)
         {
             foreach (var livro in livros)
             {
-                this.context.Set<Models.Produto>().Add(new Models.Produto(livro.Codigo, livro.Nome, livro.Preco));
+                if (dbSets.Where(p => p.Codigo == livro.Codigo).Any()) //Verifica se o livro já existe para não duplicar
+                {   
+                    dbSets.Add(new Produto(livro.Codigo, livro.Nome, livro.Preco));
+                }
             }
 
             this.context.SaveChanges();
