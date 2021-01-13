@@ -25,13 +25,24 @@ namespace CasaDoCodigo.DbConfiguration
         {
             this.context.Database.EnsureCreated();
 
+            //List<Livro> livrosNovos = FiltrandoLivrosDuplicados();
+            //this.produtoRepository.SaveProdutos(livrosNovos);
+
+            List<Livro> livros = GetLivros();
+
+            this.produtoRepository.SaveProdutos(livros);
+        }
+
+        private List<Livro> FiltrandoLivrosDuplicados()
+        {
+            //Não usado. Exemplo de como filtrar por LINQ.
+
             var livrosNoBanco = this.context.Set<Produto>().ToList();
 
             List<Livro> livrosImportados = GetLivros();
 
             var livrosNovos = livrosImportados.Where(x => !livrosNoBanco.Select(y => y.Codigo).Contains(x.Codigo)).ToList();
-
-            this.produtoRepository.SaveProdutos(livrosNovos);
+            return livrosNovos;
         }
 
         private static List<Livro> GetLivros()
