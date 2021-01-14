@@ -25,15 +25,21 @@ namespace CasaDoCodigo.Controllers
             return View(produtoRepository.GetProdutos());
         }
 
-        public IActionResult Carrinho()
+        public IActionResult Carrinho(string codigo)
         {
-            return View();
+            if (!String.IsNullOrEmpty(codigo))
+            {
+                pedidoRepository.AddItem(codigo);
+
+            }
+
+            Pedido pedido = pedidoRepository.GetPedido();
+            return View(pedido.Itens);
         }
 
         public IActionResult Cadastro()
         {
-            Pedido pedido = pedidoRepository.GetPedido();
-            return View(pedido.Itens);
+            return View();
         }
 
         public IActionResult Resumo()
