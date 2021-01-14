@@ -26,10 +26,7 @@ namespace CasaDoCodigo
         {
             services.AddMvc();
 
-            // Banco de dados para os testes na Funcesi.
-            //string connectionString = Configuration.GetConnectionString("DbWork");
-
-            // Banco de dados para testes em casa.
+            // String de conexão
             string connectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<ApplicationContext>(options =>
@@ -63,7 +60,7 @@ namespace CasaDoCodigo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pedido}/{action=Carrossel}/{id?}");
+                    template: "{controller=Pedido}/{action=Carrossel}/{codigo?}");
             });
 
 
