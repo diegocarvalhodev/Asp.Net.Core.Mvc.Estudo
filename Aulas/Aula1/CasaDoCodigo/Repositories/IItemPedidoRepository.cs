@@ -1,6 +1,6 @@
 ﻿namespace CasaDoCodigo.Repositories
 {
-    interface IItemPedidoRepository
+    public interface IItemPedidoRepository
     {
 
     }

@@ -16,6 +16,23 @@ namespace CasaDoCodigo.Repositories
             this.contextAccessor = contextAccessor;
         }
 
+        public Pedido GetPedido()
+        {
+            var pedidoId = GetPedidoId();
+            var pedido = dbSets
+                .Where(p => p.Id == pedidoId)
+                .SingleOrDefault();
+
+            if (pedido == null)
+            {
+                pedido = new Pedido();
+                dbSets.Add(pedido);
+                context.SaveChanges();
+            }
+
+            return pedido;
+        }
+
         private int? GetPedidoId()
         {
             return contextAccessor.HttpContext.Session.GetInt32("pedidoId");
