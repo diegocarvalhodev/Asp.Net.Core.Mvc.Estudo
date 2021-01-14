@@ -30,7 +30,7 @@ namespace CasaDoCodigo.Repositories
         {
             foreach (var livro in livros)
             {
-                if (dbSets.Where(p => p.Codigo == livro.Codigo).Any()) //Verifica se o livro já existe para não duplicar
+                if (!dbSets.Where(p => p.Codigo == livro.Codigo).Any()) //Verifica se o livro já existe para não duplicar
                 {   
                     dbSets.Add(new Produto(livro.Codigo, livro.Nome, livro.Preco));
                 }
