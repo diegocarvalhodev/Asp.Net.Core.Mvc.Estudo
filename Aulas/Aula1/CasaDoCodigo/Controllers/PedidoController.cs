@@ -18,7 +18,7 @@ namespace CasaDoCodigo.Controllers
         {
             this.produtoRepository = produtoRepository;
             this.pedidoRepository = pedidoRepository;
-    }
+        }
 
         public IActionResult Carrossel()
         {   

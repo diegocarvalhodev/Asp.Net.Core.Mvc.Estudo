@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Repositories
 {
+    public interface IPedidoRepository
+    {
+        Pedido GetPedido();
+        void AddItem(string codigo);
+    }
+
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {
         private readonly IHttpContextAccessor contextAccessor;
