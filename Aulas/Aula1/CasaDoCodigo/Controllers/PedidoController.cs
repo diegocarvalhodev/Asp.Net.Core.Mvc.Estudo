@@ -30,7 +30,6 @@ namespace CasaDoCodigo.Controllers
             if (!String.IsNullOrEmpty(codigo))
             {
                 pedidoRepository.AddItem(codigo);
-
             }
 
             Pedido pedido = pedidoRepository.GetPedido();
@@ -44,7 +43,8 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Resumo()
         {
-            return View();
+            Pedido pedido = pedidoRepository.GetPedido();
+            return View(pedido);
         }
     }
 }
