@@ -37,6 +37,16 @@ namespace CasaDoCodigo
                 options.UseSqlServer(connectionString)
             );
 
+            /*
+            services.AddTransient<IDataService, DataService>();     //A cada chamada de solicitação de serviço, uma instância será criada.
+            
+            services.AddScoped<IDataService, DataService>();        //Uma instância para cada requisição
+
+            services.AddSingleton<IDataService>(new DataService()); //Instância única que vai existir ao longo de toda a aplicação.
+                                                                    //Enquanto a aplicação estiver rodando, sempre irá trabalhar
+                                                                    //com uma única instância do serviço.
+             */
+
             services.AddTransient<IDataService, DataService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<ICadastroRepository, CadastroRepository>();
