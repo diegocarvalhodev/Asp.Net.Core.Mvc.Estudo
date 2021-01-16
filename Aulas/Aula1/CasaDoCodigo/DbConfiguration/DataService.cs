@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using CasaDoCodigo.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,17 @@ namespace CasaDoCodigo.DbConfiguration
 
         public void InicializeDB()
         {
-            this.context.Database.EnsureCreated();
+            //Criando o banco, se ainda não criado, utilizando modelo.
+            //Observação: após usado, não permite mais utilizar migrações no banco.
+            /*this.context
+                .Database
+                .EnsureCreated();
+            */
+
+            //Criando o banco, se ainda não criado, utilizando migrãções.
+            this.context
+                .Database
+                .Migrate();
 
             //List<Livro> livrosNovos = FiltrandoLivrosDuplicados();
             //this.produtoRepository.SaveProdutos(livrosNovos);
