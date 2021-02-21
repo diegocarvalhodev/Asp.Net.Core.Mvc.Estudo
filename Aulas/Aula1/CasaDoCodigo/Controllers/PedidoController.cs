@@ -12,12 +12,15 @@ namespace CasaDoCodigo.Controllers
     {
         private readonly IProdutoRepository produtoRepository;
         private readonly IPedidoRepository pedidoRepository;
+        private readonly IItemPedidoRepository itemPedidoRepository;
 
         public PedidoController(IProdutoRepository produtoRepository,
-            IPedidoRepository pedidoRepository)
+            IPedidoRepository pedidoRepository,
+            IItemPedidoRepository itemPedidoRepository)
         {
             this.produtoRepository = produtoRepository;
             this.pedidoRepository = pedidoRepository;
+            this.itemPedidoRepository = itemPedidoRepository;
         }
 
         public IActionResult Carrossel()
@@ -46,5 +49,14 @@ namespace CasaDoCodigo.Controllers
             Pedido pedido = pedidoRepository.GetPedido();
             return View(pedido);
         }
+
+        [HttpPost] //Atributo para permitir apenas requisições do tipo POST
+        public void UpdateQuantidade([FromBody]ItemPedido itemPedido)
+            /*O atributo [FromBody] sinalizar que o valor, enviado
+              na requisição, faz parte do corpo da requisição.*/
+        {
+            //itemPedidoRepository.UpdateQuantidade(itemPedido);
+        }
+
     }
 }
