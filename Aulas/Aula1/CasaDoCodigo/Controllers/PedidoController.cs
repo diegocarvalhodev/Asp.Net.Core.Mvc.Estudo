@@ -55,7 +55,7 @@ namespace CasaDoCodigo.Controllers
             /*O atributo [FromBody] sinalizar que o valor, enviado
               na requisição, faz parte do corpo da requisição.*/
         {
-            //itemPedidoRepository.UpdateQuantidade(itemPedido);
+            itemPedidoRepository.UpdateQuantidade(itemPedido);
         }
 
     }

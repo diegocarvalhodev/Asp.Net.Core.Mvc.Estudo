@@ -92,7 +92,7 @@ namespace CasaDoCodigo.Models
             PrecoUnitario = precoUnitario;
         }
 
-        internal void AtualizaQuantidade(int quantidade)
+        public void AtualizaQuantidade(int quantidade)
         {
             this.Quantidade = quantidade;
         }

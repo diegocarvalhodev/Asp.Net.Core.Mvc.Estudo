@@ -19,8 +19,8 @@ namespace CasaDoCodigo.Repositories
 
         public void UpdateQuantidade(ItemPedido itemPedido)
         {
-            var itemPedidoDB = dbSets.
-                                Where(i => i.Id == itemPedido.Id)
+            var itemPedidoDB = dbSets
+                                .Where(ip => ip.Id == itemPedido.Id)
                                 .SingleOrDefault();
 
             if (itemPedidoDB != null)
