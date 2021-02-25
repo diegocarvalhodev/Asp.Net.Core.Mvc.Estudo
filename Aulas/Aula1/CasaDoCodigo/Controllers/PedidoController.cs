@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModels;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,8 +36,9 @@ namespace CasaDoCodigo.Controllers
                 pedidoRepository.AddItem(codigo);
             }
 
-            Pedido pedido = pedidoRepository.GetPedido();
-            return View(pedido.Itens);
+            var itens = pedidoRepository.GetPedido().Itens;
+            CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itens);
+            return base.View(carrinhoViewModel);
         }
 
         public IActionResult Cadastro()
@@ -51,11 +53,11 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost] //Atributo para permitir apenas requisições do tipo POST
-        public void UpdateQuantidade([FromBody]ItemPedido itemPedido)
+        public UpdateQuantidadeResponse UpdateQuantidade([FromBody]ItemPedido itemPedido)
             /*O atributo [FromBody] sinalizar que o valor, enviado
               na requisição, faz parte do corpo da requisição.*/
         {
-            itemPedidoRepository.UpdateQuantidade(itemPedido);
+            return pedidoRepository.UpdateQuantidade(itemPedido);
         }
 
     }
