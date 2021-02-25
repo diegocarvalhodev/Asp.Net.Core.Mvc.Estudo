@@ -43,7 +43,13 @@ class Carrinho {
             linhaDoItem.find('[subtotal]').html( (itemPedido.subtotal).duasCasas() );
 
             let carrinhoViewModel = response.carrinhoViewModel;
-            $('[numero-itens]').html('Total: ' + carrinhoViewModel.itens.length + ' itens')
+
+            if (carrinhoViewModel.itens.length > 1) {
+                $('[numero-itens]').html('Total: ' + carrinhoViewModel.itens.length + ' itens');
+            }
+            else {
+                $('[numero-itens]').html('Total: ' + carrinhoViewModel.itens.length + ' item');
+            }
 
             $('[total]').html((carrinhoViewModel.total).duasCasas());
 
