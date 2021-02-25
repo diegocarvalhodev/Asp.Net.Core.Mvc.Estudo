@@ -9,6 +9,7 @@ namespace CasaDoCodigo.Repositories
     public interface IItemPedidoRepository
     {
         ItemPedido GetItemPedido(int itemPedidoId);
+        void RemoveItemPedido(int itemPedido);
     }
 
     public class ItemPedidoRepository : BaseRepository<ItemPedido>, IItemPedidoRepository
@@ -22,6 +23,11 @@ namespace CasaDoCodigo.Repositories
             return dbSets
                     .Where(ip => ip.Id == itemPedidoId)
                     .SingleOrDefault();
+        }
+
+        public void RemoveItemPedido(int itemPedido)
+        {
+            dbSets.Remove(GetItemPedido(itemPedido));
         }
     }
 }
