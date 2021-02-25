@@ -53,7 +53,8 @@ namespace CasaDoCodigo.Controllers
             return View(pedido.Cadastro);
         }
 
-        public IActionResult Resumo()
+        [HttpPost]
+        public IActionResult Resumo(Cadastro cadastro)
         {
             Pedido pedido = pedidoRepository.GetPedido();
             return View(pedido);
