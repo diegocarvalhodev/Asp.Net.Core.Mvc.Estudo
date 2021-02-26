@@ -54,6 +54,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] //Aceitar requisição apenas com Token válido
         public IActionResult Resumo(Cadastro cadastro)
         {
             if (ModelState.IsValid)
