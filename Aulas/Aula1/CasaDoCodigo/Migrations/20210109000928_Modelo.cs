@@ -15,16 +15,16 @@ namespace CasaDoCodigo.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Bairro = table.Column<string>(nullable: false),
-                    CEP = table.Column<string>(nullable: false),
-                    Complemento = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Endereco = table.Column<string>(nullable: false),
-                    Municipio = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
-                    UF = table.Column<string>(nullable: false)
-                },
+                    Endereco = table.Column<string>(nullable: false),
+                    Complemento = table.Column<string>(nullable: false),
+                    Bairro = table.Column<string>(nullable: false),
+                    Municipio = table.Column<string>(nullable: false),
+                    UF = table.Column<string>(nullable: false),
+                    CEP = table.Column<string>(nullable: false)
+        },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cadastro", x => x.Id);

@@ -54,6 +54,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] //Aceitar requisição apenas com Token válido
         public IActionResult Resumo(Cadastro cadastro)
         {
             if (ModelState.IsValid)
@@ -65,6 +66,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost] //Atributo para permitir apenas requisições do tipo POST
+        [ValidateAntiForgeryToken] //Aceitar requisição apenas com Token válido
         public UpdateQuantidadeResponse UpdateQuantidade([FromBody] ItemPedido itemPedido)
         /*O atributo [FromBody] sinalizar que o valor, enviado
           na requisição, faz parte do corpo da requisição.*/

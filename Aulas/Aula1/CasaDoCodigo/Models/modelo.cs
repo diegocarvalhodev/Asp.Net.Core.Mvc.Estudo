@@ -39,6 +39,7 @@ namespace CasaDoCodigo.Models
     public class Cadastro : BaseModel
     {
         public virtual Pedido Pedido { get; set; }
+
         [MinLength(5,ErrorMessage = "Nome deve ter no mínimo 5 caracteres")]
         [MaxLength(50, ErrorMessage = "Nome deve ter no máximo 50 caracteres")]
         [Required(ErrorMessage = "Nome é obrigatório")]
@@ -63,6 +64,19 @@ namespace CasaDoCodigo.Models
 
         public Cadastro()
         {
+        }
+
+        public void Update(Cadastro novoCadastro)
+        {
+            this.Nome = novoCadastro.Nome;
+            this.Email = novoCadastro.Email;
+            this.Telefone = novoCadastro.Telefone;
+            this.Endereco = novoCadastro.Endereco;
+            this.Complemento = novoCadastro.Complemento;
+            this.Bairro = novoCadastro.Bairro;
+            this.Municipio = novoCadastro.Municipio;
+            this.UF = novoCadastro.UF;
+            this.CEP = novoCadastro.CEP;
         }
     }
 
