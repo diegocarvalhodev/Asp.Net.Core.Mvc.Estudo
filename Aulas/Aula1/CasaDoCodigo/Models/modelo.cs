@@ -39,27 +39,44 @@ namespace CasaDoCodigo.Models
     public class Cadastro : BaseModel
     {
         public virtual Pedido Pedido { get; set; }
-        [Required]
+
+        [MinLength(5,ErrorMessage = "Nome deve ter no m�nimo 5 caracteres")]
+        [MaxLength(50, ErrorMessage = "Nome deve ter no m�ximo 50 caracteres")]
+        [Required(ErrorMessage = "Nome � obrigat�rio")]
         public string Nome { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "E-mail � obrigat�rio")]
+        [EmailAddress(ErrorMessage = "E-mail em formato inv�lido")]
         public string Email { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Telefone � obrigat�rio")]
         public string Telefone { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Endere�o � obrigat�rio")]
         public string Endereco { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Complemento � obrigat�rio")]
         public string Complemento { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Bairro � obrigat�rio")]
         public string Bairro { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Munic�pio � obrigat�rio")]
         public string Municipio { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "UF � obrigat�rio")]
         public string UF { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "CEP � obrigat�rio")]
         public string CEP { get; set; } = "";
 
         public Cadastro()
         {
+        }
+
+        public void Update(Cadastro novoCadastro)
+        {
+            this.Nome = novoCadastro.Nome;
+            this.Email = novoCadastro.Email;
+            this.Telefone = novoCadastro.Telefone;
+            this.Endereco = novoCadastro.Endereco;
+            this.Complemento = novoCadastro.Complemento;
+            this.Bairro = novoCadastro.Bairro;
+            this.Municipio = novoCadastro.Municipio;
+            this.UF = novoCadastro.UF;
+            this.CEP = novoCadastro.CEP;
         }
     }
 
@@ -78,6 +95,8 @@ namespace CasaDoCodigo.Models
         [Required]
         [DataMember]
         public decimal PrecoUnitario { get; private set; }
+        [DataMember]
+        public decimal Subtotal => this.Quantidade * this.PrecoUnitario;
 
         public ItemPedido()
         {
@@ -92,7 +111,7 @@ namespace CasaDoCodigo.Models
             PrecoUnitario = precoUnitario;
         }
 
-        internal void AtualizaQuantidade(int quantidade)
+        public void AtualizaQuantidade(int quantidade)
         {
             this.Quantidade = quantidade;
         }

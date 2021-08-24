@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModels;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +25,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         public IActionResult Carrossel()
-        {   
+        {
             return View(produtoRepository.GetProdutos());
         }
 
@@ -35,26 +36,43 @@ namespace CasaDoCodigo.Controllers
                 pedidoRepository.AddItem(codigo);
             }
 
-            Pedido pedido = pedidoRepository.GetPedido();
-            return View(pedido.Itens);
+            var itens = pedidoRepository.GetPedido().Itens;
+            CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itens);
+            return base.View(carrinhoViewModel);
         }
 
         public IActionResult Cadastro()
         {
-            return View();
-        }
+            var pedido = pedidoRepository.GetPedido();
 
-        public IActionResult Resumo()
-        {
-            Pedido pedido = pedidoRepository.GetPedido();
-            return View(pedido);
+            if ( (pedido == null) || (pedido.Itens.Count == 0))
+            {
+                return RedirectToAction("Carrossel");
+            }
+
+            return View(pedido.Cadastro);
         }
 
         [HttpPost]
-        public void UpdateQuantidade([FromBody]ItemPedido itemPedido)
+        [ValidateAntiForgeryToken] //Aceitar requisição apenas com Token válido
+        public IActionResult Resumo(Cadastro cadastro)
         {
-            itemPedidoRepository.UpdateQuantidade(itemPedido);
-         }
+            if (ModelState.IsValid)
+            {
+                return View(pedidoRepository.UpdateCadastro(cadastro));
+            }
+
+            return RedirectToAction("Cadastro");
+        }
+
+        [HttpPost] //Atributo para permitir apenas requisições do tipo POST
+        [ValidateAntiForgeryToken] //Aceitar requisição apenas com Token válido
+        public UpdateQuantidadeResponse UpdateQuantidade([FromBody] ItemPedido itemPedido)
+        /*O atributo [FromBody] sinalizar que o valor, enviado
+          na requisição, faz parte do corpo da requisição.*/
+        {
+            return pedidoRepository.UpdateQuantidade(itemPedido);
+        }
 
     }
 }
