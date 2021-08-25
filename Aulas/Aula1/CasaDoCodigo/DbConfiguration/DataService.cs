@@ -52,7 +52,10 @@ namespace CasaDoCodigo.DbConfiguration
 
             List<Livro> livrosImportados = GetLivros();
 
-            var livrosNovos = livrosImportados.Where(x => !livrosNoBanco.Select(y => y.Codigo).Contains(x.Codigo)).ToList();
+            var livrosNovos = livrosImportados
+                              .Where(x => !livrosNoBanco.Select(y => y.Codigo).Contains(x.Codigo))
+                              .ToList();
+            
             return livrosNovos;
         }
 
