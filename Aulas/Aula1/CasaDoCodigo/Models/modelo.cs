@@ -40,26 +40,26 @@ namespace CasaDoCodigo.Models
     {
         public virtual Pedido Pedido { get; set; }
 
-        [MinLength(5,ErrorMessage = "Nome deve ter no m�nimo 5 caracteres")]
-        [MaxLength(50, ErrorMessage = "Nome deve ter no m�ximo 50 caracteres")]
-        [Required(ErrorMessage = "Nome � obrigat�rio")]
+        [MinLength(5,ErrorMessage = "Nome deve ter no ménimo 5 caracteres")]
+        [MaxLength(50, ErrorMessage = "Nome deve ter no méximo 50 caracteres")]
+        [Required(ErrorMessage = "Nome é obrigatório")]
         public string Nome { get; set; } = "";
-        [Required(ErrorMessage = "E-mail � obrigat�rio")]
-        [EmailAddress(ErrorMessage = "E-mail em formato inv�lido")]
+        [Required(ErrorMessage = "E-mail é obrigatório")]
+        [EmailAddress(ErrorMessage = "E-mail em formato inválido")]
         public string Email { get; set; } = "";
-        [Required(ErrorMessage = "Telefone � obrigat�rio")]
+        [Required(ErrorMessage = "Telefone é obrigatório")]
         public string Telefone { get; set; } = "";
-        [Required(ErrorMessage = "Endere�o � obrigat�rio")]
+        [Required(ErrorMessage = "Endereço é obrigatório")]
         public string Endereco { get; set; } = "";
-        [Required(ErrorMessage = "Complemento � obrigat�rio")]
+        [Required(ErrorMessage = "Complemento é obrigatório")]
         public string Complemento { get; set; } = "";
-        [Required(ErrorMessage = "Bairro � obrigat�rio")]
+        [Required(ErrorMessage = "Bairro é obrigatório")]
         public string Bairro { get; set; } = "";
-        [Required(ErrorMessage = "Munic�pio � obrigat�rio")]
+        [Required(ErrorMessage = "Municépio é obrigatório")]
         public string Municipio { get; set; } = "";
-        [Required(ErrorMessage = "UF � obrigat�rio")]
+        [Required(ErrorMessage = "UF é obrigatório")]
         public string UF { get; set; } = "";
-        [Required(ErrorMessage = "CEP � obrigat�rio")]
+        [Required(ErrorMessage = "CEP é obrigatório")]
         public string CEP { get; set; } = "";
 
         public Cadastro()
